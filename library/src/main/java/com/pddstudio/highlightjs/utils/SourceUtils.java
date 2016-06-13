@@ -15,7 +15,7 @@ public class SourceUtils {
             "<html>\n" +
             "<head>\n" +
             "    <meta charset=\"utf-8\">\n" +
-            "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi\">\n" +
+            "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0\">\n" +
             "    <style type=\"text/css\">\n" +
             "       html, body {\n" +
             "           width:100%;\n" +
