@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -27,9 +26,8 @@ import java.util.List;
  * have a look at the README.md
  */
 
-public class FilesListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, RepositoryLoader.Callback, FilesAdapter.OnItemSelectedListener {
+public class FilesListFragment extends Fragment implements RepositoryLoader.Callback, FilesAdapter.OnItemSelectedListener {
 
-    private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private FilesAdapter filesAdapter;
 
@@ -41,14 +39,11 @@ public class FilesListFragment extends Fragment implements SwipeRefreshLayout.On
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_file_list, container, false);
-        swipeRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.swipe_refresh_layout);
-        swipeRefreshLayout.setOnRefreshListener(this);
         recyclerView = (RecyclerView) root.findViewById(R.id.files_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         filesAdapter = new FilesAdapter(new LinkedList<FileObject>(), this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(filesAdapter);
-        swipeRefreshLayout.setRefreshing(true);
         return root;
     }
 
@@ -59,19 +54,12 @@ public class FilesListFragment extends Fragment implements SwipeRefreshLayout.On
     }
 
     @Override
-    public void onRefresh() {
-
-    }
-
-    @Override
     public void onItemLoaded(FileObject fileObject) {
         filesAdapter.addItem(fileObject);
     }
 
     @Override
-    public void onFilesLoaded(List<FileObject> fileObjects) {
-        swipeRefreshLayout.setRefreshing(false);
-    }
+    public void onFilesLoaded(List<FileObject> fileObjects) {}
 
     @Override
     public void onItemSelected(int position) {
