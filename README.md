@@ -15,7 +15,7 @@ Selecting a file show's up the syntax highlighted content.
 
 ###Download
 
-You can download the sample apk *here*
+You can download the sample apk *[here](https://github.com/PDDStudio/highlightjs-android/raw/master/highlightjs-demo-debug.apk)*
 
 ##Getting Started
 
@@ -84,6 +84,8 @@ In your Activity/Fragment assign the view and set it's content.
 
 ###Customize the View
 
+For a complete overview of all themes and languages you can check out the official highlight.js demo *[here](https://highlightjs.org/static/demo/)*
+
 You can customize the View's **Theme** and **Language**.
 By default the Theme is set to *Theme.DEFAULT* and the language is set to *Language.AUTO_DETECT*
 
@@ -128,3 +130,49 @@ highlightJsView.reload();
 
 - Source Code which is loaded via URL requires internet permission (source is loaded asynchronous) `<uses-permission android:name="android.permission.INTERNET" />`
 - Source Code which is loaded by a `File` object from the device's internal storage requires  storage permission (especially on +Android 6.0)
+
+##About & Contact
+- In case you've a question feel free to hit me up via E-Mail (patrick.pddstudio@googlemail.com) 
+- or [Google+](http://plus.google.com/+PatrickJung42) / Hangouts
+
+##License
+```
+    Copyright 2016 Patrick J
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+	Copyright (c) 2006, Ivan Sagalaev
+	All rights reserved.
+	Redistribution and use in source and binary forms, with or without
+	modification, are permitted provided that the following conditions are met:
+
+	    * Redistributions of source code must retain the above copyright
+	      notice, this list of conditions and the following disclaimer.
+	    * Redistributions in binary form must reproduce the above copyright
+	      notice, this list of conditions and the following disclaimer in the
+	      documentation and/or other materials provided with the distribution.
+	    * Neither the name of highlight.js nor the names of its contributors 
+	      may be used to endorse or promote products derived from this software 
+	      without specific prior written permission.
+
+	THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND ANY
+	EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+	WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+	DISCLAIMED. IN NO EVENT SHALL THE REGENTS AND CONTRIBUTORS BE LIABLE FOR ANY
+	DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+	(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+	LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+	ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+```
