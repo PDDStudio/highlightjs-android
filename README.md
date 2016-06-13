@@ -1,7 +1,7 @@
-##Android - HighlightJs View
+##HighlightJs View - Android
 A syntax highlighting view, powered by **[highlight.js](https://highlightjs.org/)**, for Android.
 
-*Badge*
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.pddstudio/highlightjs-android/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.pddstudio/highlightjs-android)
 
 ##Demo Application
 
@@ -30,7 +30,7 @@ dependencies {
 }
 ```
 
-Replace X.X.X with the current version - which can be found in the *release Section*
+Replace X.X.X with the current version - which can be found in the *[release section](https://github.com/PDDStudio/highlightjs-android/releases)*
 
 ###Include the View into your Layout
 
