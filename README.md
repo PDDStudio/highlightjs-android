@@ -9,6 +9,9 @@ The demo application shows a simple example usage for this library.
 It lists the files of this repository's commits and allows you to browse the changed files.
 Selecting a file show's up the syntax highlighted content.
 
+**Note:**
+In case the sample application doesn't load the content you can fork this repo and replace the anonymous Github-Login with your credentials (This bug is caused by the *[Github Library](http://github-api.kohsuke.org/)* used in the sample app)
+
 ###Screenshot
 
 ![](https://raw.githubusercontent.com/PDDStudio/highlightjs-android/master/gfx/demo.png) 
