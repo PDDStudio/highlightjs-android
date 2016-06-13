@@ -10,7 +10,7 @@ It lists the files of this repository's commits and allows you to browse the cha
 Selecting a file show's up the syntax highlighted content.
 
 **Note:**
-In case the sample application doesn't load the content you can fork this repo and replace the anonymous Github-Login with your credentials (This bug is caused by the *[Github Library](http://github-api.kohsuke.org/)* used in the sample app)
+In case the sample application doesn't load the content you can fork this repo and replace the [anonymous Github-Login](https://github.com/PDDStudio/highlightjs-android/blob/master/app/src/main/java/com/pddstudio/highlightjs/demo/utils/RepositoryLoader.java#L36) with your credentials (This bug is caused by the *[Github Library](http://github-api.kohsuke.org/)* used in the sample app)
 
 ###Screenshot
 
