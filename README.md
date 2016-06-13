@@ -11,7 +11,7 @@ Selecting a file show's up the syntax highlighted content.
 
 ###Screenshot
 
-*Image*
+![](https://raw.githubusercontent.com/PDDStudio/highlightjs-android/master/gfx/demo.png) 
 
 ###Download
 
