@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="define_HighlightJsAndroid"></string>
+    <string name="library_HighlightJsAndroid_author">Patrick J</string>
+    <string name="library_HighlightJsAndroid_authorWebsite">http://pddstudio.com/</string>
+    <string name="library_HighlightJsAndroid_libraryName">HighlightJs View - Android</string>
+    <string name="library_HighlightJsAndroid_libraryDescription">A syntax highlighting view, powered by highlight.js, for Android.</string>
+    <string name="library_HighlightJsAndroid_libraryVersion">1.0.1</string>
+    <string name="library_HighlightJsAndroid_libraryWebsite">https://github.com/PDDStudio/highlightjs-android</string>
+    <string name="library_HighlightJsAndroid_licenseId">apache_2_0</string>
+    <string name="library_HighlightJsAndroid_isOpenSource">true</string>
+    <string name="library_HighlightJsAndroid_repositoryLink">https://github.com/PDDStudio/highlightjs-android</string>
+</resources>
