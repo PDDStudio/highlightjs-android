@@ -59,6 +59,7 @@ public enum Theme {
     MONOKAI("monokai"),
     MONOKAI_SUBLIME("monokai-sublime"),
     OBSIDIAN("obsidian"),
+    OCEAN("ocean"),
     PARAISO_DARK("paraiso-dark"),
     PARAISO_LIGHT("paraiso-light"),
     POJOAQUE("pojoaque"),
