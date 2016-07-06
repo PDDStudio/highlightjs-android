@@ -30,6 +30,7 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
     private Language language = Language.AUTO_DETECT;
     private Theme theme = Theme.DEFAULT;
     private String content;
+	private boolean zoomSupport = false;
 
     //local variables to register callbacks
     private OnLanguageChangedListener onLanguageChangedListener;
@@ -81,11 +82,17 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
         WebSettings settings = getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setBuiltInZoomControls(true);
+        settings.setSupportZoom(zoomSupport);
         //disable zoom controls on +Honeycomb devices
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) settings.setDisplayZoomControls(false);
         //to remove padding and margin
         setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
     }
+
+	private void changeZoomSettings(boolean enable) {
+		this.zoomSupport = enable;
+		getSettings().setSupportZoom(enable);
+	}
 
     /**
      * Attach a callback to receive calls when the Highlight-Language has changed
@@ -154,10 +161,10 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
      * @param source - The source as {@linkplain String}
      */
     public void setSource(String source) {
-        if(source != null && !source.isEmpty()) {
+        if(source != null && !(source.length() == 0)) {
             //generate and load the content
             this.content = source;
-            String page = SourceUtils.generateContent(source, theme.getName(), language.getName());
+            String page = SourceUtils.generateContent(source, theme.getName(), language.getName(), zoomSupport);
             loadDataWithBaseURL("file:///android_asset/", page, "text/html", "utf-8", null);
             //notify the callback (if set)
             if(onContentChangedListener != null) onContentChangedListener.onContentChanged();
@@ -195,6 +202,15 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
             setSource(content);
         }
     }
+
+	/**
+	 * Enable or disable zooming functionality.
+	 * Zooming is disabled by default.
+	 * @param supportZoom - true to enable, false to disable zoom
+	 */
+	public void setZoomSupportEnabled(boolean supportZoom) {
+		changeZoomSettings(supportZoom);
+	}
 
 
 }
