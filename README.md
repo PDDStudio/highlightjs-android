@@ -14,7 +14,7 @@ In case the sample application doesn't load the content you can fork this repo a
 
 ###Screenshot
 
-![](https://raw.githubusercontent.com/PDDStudio/highlightjs-android/master/gfx/demo.png) 
+![](https://raw.githubusercontent.com/PDDStudio/highlightjs-android/master/gfx/demo.png)
 
 ###Download
 
@@ -40,7 +40,7 @@ Replace X.X.X with the current version - which can be found in the *[release sec
 Add the View to your existing layout file.
 
 ```xml
-<RelativeLayout 
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -98,7 +98,7 @@ By default the Theme is set to *Theme.DEFAULT* and the language is set to *Langu
 //change theme
 highlightJsView.setTheme(Theme.ANDROID_STUDIO);
 ```
-The library supports all themes that are included in *highlight.js version 9.4.0*
+The library supports all themes that are included in *highlight.js version 9.5.0*
 
 Browse the list of themes *[here](https://github.com/PDDStudio/highlightjs-android/tree/master/library/src/main/assets/styles)*
 
@@ -108,7 +108,7 @@ Browse the list of themes *[here](https://github.com/PDDStudio/highlightjs-andro
 //change language
 highlightJsView.setHighlightLanguage(Language.JAVA);
 ```
-The library supports all languages that are included in *highlight.js version 9.4.0* (more than +130 languages)
+The library supports all languages that are included in *highlight.js version 9.5.0* (more than +130 languages)
 
 Browse the list of languages *[here](http://highlightjs.readthedocs.io/en/latest/css-classes-reference.html#language-names-and-aliases)*
 
@@ -135,7 +135,7 @@ highlightJsView.reload();
 - Source Code which is loaded by a `File` object from the device's internal storage requires  storage permission (especially on +Android 6.0)
 
 ##About & Contact
-- In case you've a question feel free to hit me up via E-Mail (patrick.pddstudio@googlemail.com) 
+- In case you've a question feel free to hit me up via E-Mail (patrick.pddstudio@googlemail.com)
 - or [Google+](http://plus.google.com/+PatrickJung42) / Hangouts
 
 ##License
@@ -164,8 +164,8 @@ highlightJsView.reload();
 	    * Redistributions in binary form must reproduce the above copyright
 	      notice, this list of conditions and the following disclaimer in the
 	      documentation and/or other materials provided with the distribution.
-	    * Neither the name of highlight.js nor the names of its contributors 
-	      may be used to endorse or promote products derived from this software 
+	    * Neither the name of highlight.js nor the names of its contributors
+	      may be used to endorse or promote products derived from this software
 	      without specific prior written permission.
 
 	THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND ANY
