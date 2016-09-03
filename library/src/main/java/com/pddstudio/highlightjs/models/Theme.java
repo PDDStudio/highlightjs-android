@@ -32,6 +32,8 @@ public enum Theme {
     ATELIER_SEASIDE_LIGHT("atelier-seaside-light"),
     ATELIER_SULPHURPOOL_DARK("atelier-sulphurpool-dark"),
     ATELIER_SULPHURPOOL_LIGHT("atelier-sulphurpool-light"),
+    ATOM_ONE_DARK("atom-one-dark"),
+    ATOM_ONE_LIGHT("atom-one-light"),
     BROWN_PAPER("brown-paper"),
     CODEPEN_EMBED("codepen-embed"),
     COLOR_BREWER("color-brewer"),
