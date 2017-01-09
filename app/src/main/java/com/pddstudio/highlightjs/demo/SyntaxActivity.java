@@ -26,12 +26,12 @@ public class SyntaxActivity extends AppCompatActivity implements SwipeRefreshLay
         setContentView(R.layout.activity_syntax);
         fileObject = (FileObject) getIntent().getExtras().getSerializable("fileObject");
         if(getActionBar() != null) {
-            getActionBar().setTitle(fileObject.getName());
+            getActionBar().setTitle(fileObject.getAbsoluteFilePath());
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(fileObject.getName());
+            getSupportActionBar().setTitle(fileObject.getAbsoluteFilePath());
         }
         //set and assign swipe refresh listener
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);

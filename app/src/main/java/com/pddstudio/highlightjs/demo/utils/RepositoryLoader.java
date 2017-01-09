@@ -92,10 +92,10 @@ public class RepositoryLoader {
 		}
 
 		private boolean isFileType(FileObject fileObject) {
-			if (fileObject.getName().endsWith(".md") || fileObject.getName().endsWith(".java") || fileObject.getName().endsWith(".gradle") || fileObject.getName()
-																																						.endsWith(".php") || fileObject
-					.getName()
-					.endsWith(".h") || fileObject.getName().endsWith(".xml")) {
+			if (fileObject.getAbsoluteFilePath().endsWith(".md") || fileObject.getAbsoluteFilePath().endsWith(".java") || fileObject.getAbsoluteFilePath().endsWith(".gradle") || fileObject.getAbsoluteFilePath()
+																																															.endsWith(".php") || fileObject
+					.getAbsoluteFilePath()
+					.endsWith(".h") || fileObject.getAbsoluteFilePath().endsWith(".xml")) {
 				return true;
 			}
 			return false;

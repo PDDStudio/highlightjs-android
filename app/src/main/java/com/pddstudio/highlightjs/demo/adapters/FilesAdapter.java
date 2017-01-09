@@ -52,7 +52,8 @@ public class FilesAdapter extends RecyclerView.Adapter<FilesAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.fileName.setText(itemData.get(position).getName());
+        holder.fileName.setText(itemData.get(position).getFileName());
+        holder.filePath.setText(itemData.get(position).getAbsoluteFilePath());
     }
 
     @Override
@@ -63,11 +64,13 @@ public class FilesAdapter extends RecyclerView.Adapter<FilesAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView fileName;
+        TextView filePath;
 
         public ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             fileName = (TextView) itemView.findViewById(R.id.file_title);
+            filePath = (TextView) itemView.findViewById(R.id.file_content);
         }
 
         @Override

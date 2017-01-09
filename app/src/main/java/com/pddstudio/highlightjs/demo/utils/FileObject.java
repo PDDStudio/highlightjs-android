@@ -1,5 +1,6 @@
 package com.pddstudio.highlightjs.demo.utils;
 
+import java.io.File;
 import java.io.Serializable;
 import java.net.URL;
 
@@ -19,12 +20,16 @@ public class FileObject implements Serializable {
         this.url = url;
     }
 
-    public String getName() {
+    public String getAbsoluteFilePath() {
         return name;
     }
 
     public URL getUrl() {
         return url;
+    }
+
+    public String getFileName() {
+        return new File(name).getName();
     }
 
 }
