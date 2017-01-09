@@ -4,21 +4,29 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.pddstudio.highlightjs.HighlightJsView;
 import com.pddstudio.highlightjs.demo.utils.FileObject;
+import com.pddstudio.highlightjs.demo.utils.ThemeChangerDialog;
 import com.pddstudio.highlightjs.models.Language;
 import com.pddstudio.highlightjs.models.Theme;
 
 import java.util.Random;
 
-public class SyntaxActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, HighlightJsView.OnThemeChangedListener {
+public class SyntaxActivity extends AppCompatActivity implements
+                                                      SwipeRefreshLayout.OnRefreshListener,
+                                                      HighlightJsView.OnThemeChangedListener,
+                                                      ThemeChangerDialog.ThemeChangeListener {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private HighlightJsView highlightJsView;
     private FileObject fileObject;
+
+    private ThemeChangerDialog themeChangerDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +56,24 @@ public class SyntaxActivity extends AppCompatActivity implements SwipeRefreshLay
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        themeChangerDialog = new ThemeChangerDialog(this);
+    }
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		new MenuInflater(this).inflate(R.menu.menu_theme_switch, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) onBackPressed();
+        if(item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        } else if(item.getItemId() == R.id.menu_switch_theme) {
+			themeChangerDialog.show(this);
+		}
         return super.onOptionsItemSelected(item);
     }
 
@@ -68,6 +92,12 @@ public class SyntaxActivity extends AppCompatActivity implements SwipeRefreshLay
     public void onThemeChanged(@NonNull Theme theme) {
         swipeRefreshLayout.setRefreshing(false);
         Toast.makeText(this, "Theme: " + theme.name(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onChangeTheme(@NonNull Theme theme) {
+        highlightJsView.setTheme(theme);
+        highlightJsView.refresh();
     }
 
 }

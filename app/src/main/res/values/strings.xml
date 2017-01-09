@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">HighlightJs</string>
+    <string name="dialog_theme_selection_title">Pick a Theme:</string>
+    <string name="menu_entry_switch_theme">Switch Highlighting Theme</string>
 </resources>
