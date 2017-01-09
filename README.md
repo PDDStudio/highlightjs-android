@@ -2,6 +2,7 @@
 A syntax highlighting view, powered by **[highlight.js](https://highlightjs.org/)**, for Android.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.pddstudio/highlightjs-android/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.pddstudio/highlightjs-android)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-highlightjs--android-green.svg?style=true)](https://android-arsenal.com/details/1/3875)
 
 ##Demo Application
 
@@ -9,16 +10,13 @@ The demo application shows a simple example usage for this library.
 It lists the files of this repository's commits and allows you to browse the changed files.
 Selecting a file show's up the syntax highlighted content.
 
-**Note:**
-In case the sample application doesn't load the content you can fork this repo and replace the [anonymous Github-Login](https://github.com/PDDStudio/highlightjs-android/blob/master/app/src/main/java/com/pddstudio/highlightjs/demo/utils/RepositoryLoader.java#L36) with your credentials (This bug is caused by the *[Github Library](http://github-api.kohsuke.org/)* used in the sample app)
-
 ###Screenshot
 
 ![](https://raw.githubusercontent.com/PDDStudio/highlightjs-android/master/gfx/demo.png)
 
 ###Download
 
-You can download the sample apk *[here](https://github.com/PDDStudio/highlightjs-android/raw/master/highlightjs-demo-debug.apk)*
+You can download the sample apk *[in the release section](https://github.com/PDDStudio/highlightjs-android/releases)*
 
 ##Getting Started
 
@@ -98,7 +96,7 @@ By default the Theme is set to *Theme.DEFAULT* and the language is set to *Langu
 //change theme
 highlightJsView.setTheme(Theme.ANDROID_STUDIO);
 ```
-The library supports all themes that are included in *highlight.js version 9.5.0*
+The library supports all themes that are included in *highlight.js version 9.9.0*
 
 Browse the list of themes *[here](https://github.com/PDDStudio/highlightjs-android/tree/master/library/src/main/assets/styles)*
 
@@ -108,7 +106,7 @@ Browse the list of themes *[here](https://github.com/PDDStudio/highlightjs-andro
 //change language
 highlightJsView.setHighlightLanguage(Language.JAVA);
 ```
-The library supports all languages that are included in *highlight.js version 9.5.0* (more than +130 languages)
+The library supports all languages that are included in *highlight.js version 9.9.0* (more than +130 languages)
 
 Browse the list of languages *[here](http://highlightjs.readthedocs.io/en/latest/css-classes-reference.html#language-names-and-aliases)*
 
