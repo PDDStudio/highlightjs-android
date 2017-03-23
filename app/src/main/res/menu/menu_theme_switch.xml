@@ -8,4 +8,16 @@
 		android:title="@string/menu_entry_switch_theme"
 		app:showAsAction="never" />
 
+	<item
+		android:id="@+id/menu_check_zoom"
+		android:title="@string/enable_zooming"
+		android:checkable="true"
+		app:showAsAction="never" />
+
+	<item
+		android:id="@+id/menu_check_line_numbers"
+		android:title="@string/show_line_numbers"
+		android:checkable="true"
+		app:showAsAction="never" />
+
 </menu>

@@ -51,6 +51,7 @@ public class SyntaxActivity extends AppCompatActivity implements
         //change theme and set language to auto detect
         highlightJsView.setTheme(Theme.ANDROID_STUDIO);
         highlightJsView.setHighlightLanguage(Language.AUTO_DETECT);
+        highlightJsView.setShowLineNumbers(true);
         //load the source
         highlightJsView.setSource(fileObject.getUrl());
     }
@@ -69,13 +70,36 @@ public class SyntaxActivity extends AppCompatActivity implements
 
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
-            onBackPressed();
-        } else if(item.getItemId() == R.id.menu_switch_theme) {
-			themeChangerDialog.show(this);
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				onBackPressed();
+				break;
+			case R.id.menu_switch_theme:
+				themeChangerDialog.show(this);
+				break;
+			case R.id.menu_check_line_numbers:
+				item.setChecked(!item.isChecked());
+				onShowLineNumbersToggled(item.isChecked());
+				break;
+			case R.id.menu_check_zoom:
+				item.setChecked(!item.isChecked());
+				onZoomSupportToggled(item.isChecked());
+				break;
+			default:
+				break;
 		}
         return super.onOptionsItemSelected(item);
     }
+
+    private void onShowLineNumbersToggled(boolean enableLineNumbers) {
+		highlightJsView.setShowLineNumbers(enableLineNumbers);
+		highlightJsView.refresh();
+	}
+
+	private void onZoomSupportToggled(boolean enableZooming) {
+		highlightJsView.setZoomSupportEnabled(enableZooming);
+		highlightJsView.refresh();
+	}
 
     @Override
     public void onRefresh() {
