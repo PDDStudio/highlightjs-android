@@ -96,7 +96,7 @@ By default the Theme is set to *Theme.DEFAULT* and the language is set to *Langu
 //change theme
 highlightJsView.setTheme(Theme.ANDROID_STUDIO);
 ```
-The library supports all themes that are included in *highlight.js version 9.9.0*
+The library supports all themes that are included in *highlight.js version 9.10.0*
 
 Browse the list of themes *[here](https://github.com/PDDStudio/highlightjs-android/tree/master/library/src/main/assets/styles)*
 
@@ -106,9 +106,29 @@ Browse the list of themes *[here](https://github.com/PDDStudio/highlightjs-andro
 //change language
 highlightJsView.setHighlightLanguage(Language.JAVA);
 ```
-The library supports all languages that are included in *highlight.js version 9.9.0* (more than +130 languages)
+The library supports all languages that are included in *highlight.js version 9.10.0* (more than +130 languages)
 
 Browse the list of languages *[here](http://highlightjs.readthedocs.io/en/latest/css-classes-reference.html#language-names-and-aliases)*
+
+**Enable or disable support for zooming:**
+
+```java
+//enable or disable zooming support for HighlightJsView
+//note: in case you change this during runtime don't forget to
+//call highlightJsView.reload(); for the changes to apply!
+highlightJsView.setZoomSupportEnabled(true);
+```
+
+**Enable or disable line numbers:**
+
+```java
+//enable or disable line numbers on the left side of the source
+//note: in case you change this during runtime don't forget to
+//call highlightJsView.reload(); for the changes to apply!
+highlightJsView.setShowLineNumbers(enableLineNumbers);
+```
+
+By default Highlight.js does not support line numbers. However, thanks to [wcoder](https://github.com/wcoder/) and all the hard work that was put into [highlightjs-line-numbers.js](https://github.com/wcoder/highlightjs-line-numbers.js/). This made it easy for me to port and include this functionality into this library.
 
 ###Change the view's source
 
