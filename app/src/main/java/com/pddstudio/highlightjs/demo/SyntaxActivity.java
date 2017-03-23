@@ -51,7 +51,6 @@ public class SyntaxActivity extends AppCompatActivity implements
         //change theme and set language to auto detect
         highlightJsView.setTheme(Theme.ANDROID_STUDIO);
         highlightJsView.setHighlightLanguage(Language.AUTO_DETECT);
-        highlightJsView.setShowLineNumbers(true);
         //load the source
         highlightJsView.setSource(fileObject.getUrl());
     }
