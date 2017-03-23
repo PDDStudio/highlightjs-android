@@ -31,6 +31,7 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
     private Theme theme = Theme.DEFAULT;
     private String content;
 	private boolean zoomSupport = false;
+    private boolean showLineNumbers = false;
 
     //local variables to register callbacks
     private OnLanguageChangedListener onLanguageChangedListener;
@@ -164,7 +165,7 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
         if(source != null && !(source.length() == 0)) {
             //generate and load the content
             this.content = source;
-            String page = SourceUtils.generateContent(source, theme.getName(), language.getName(), zoomSupport);
+            String page = SourceUtils.generateContent(source, theme.getName(), language.getName(), zoomSupport, showLineNumbers);
             loadDataWithBaseURL("file:///android_asset/", page, "text/html", "utf-8", null);
             //notify the callback (if set)
             if(onContentChangedListener != null) onContentChangedListener.onContentChanged();
@@ -211,6 +212,15 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
 	public void setZoomSupportEnabled(boolean supportZoom) {
 		changeZoomSettings(supportZoom);
 	}
+
+	/**
+	 * Enable or disable line numbers on the left side of the code snippet.
+	 * Line numbers are disabled by default
+	 * @param showLineNumbers - true to show - false to hide line numbers next to the code
+	 */
+	public void setShowLineNumbers(boolean showLineNumbers) {
+        this.showLineNumbers = showLineNumbers;
+    }
 
 
 }
