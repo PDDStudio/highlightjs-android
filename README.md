@@ -1,26 +1,26 @@
-##HighlightJs View - Android
+## HighlightJs View - Android
 A syntax highlighting view, powered by **[highlight.js](https://highlightjs.org/)**, for Android.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.pddstudio/highlightjs-android/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.pddstudio/highlightjs-android)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-highlightjs--android-green.svg?style=true)](https://android-arsenal.com/details/1/3875)
 
-##Demo Application
+## Demo Application
 
 The demo application shows a simple example usage for this library.
 It lists the files of this repository's commits and allows you to browse the changed files.
 Selecting a file show's up the syntax highlighted content.
 
-###Screenshot
+### Screenshot
 
 ![](https://raw.githubusercontent.com/PDDStudio/highlightjs-android/master/gfx/demo.png)
 
-###Download
+### Download
 
 You can download the sample apk *[in the release section](https://github.com/PDDStudio/highlightjs-android/releases)*
 
-##Getting Started
+## Getting Started
 
-###Add the library as dependency
+### Add the library as dependency
 
 Add the library as dependency to your `build.gradle` file.
 
@@ -33,7 +33,7 @@ dependencies {
 
 Replace X.X.X with the current version - which can be found in the *[release section](https://github.com/PDDStudio/highlightjs-android/releases)*
 
-###Include the View into your Layout
+### Include the View into your Layout
 
 Add the View to your existing layout file.
 
@@ -56,7 +56,7 @@ Add the View to your existing layout file.
 </RelativeLayout>
 ```
 
-###Assign the view and set it's content
+### Assign the view and set it's content
 
 In your Activity/Fragment assign the view and set it's content.
 
@@ -83,7 +83,7 @@ In your Activity/Fragment assign the view and set it's content.
 ```
 
 
-###Customize the View
+### Customize the View
 
 For a complete overview of all themes and languages you can check out the official highlight.js demo *[here](https://highlightjs.org/static/demo/)*
 
@@ -130,7 +130,7 @@ highlightJsView.setShowLineNumbers(enableLineNumbers);
 
 By default Highlight.js does not support line numbers. However, thanks to [wcoder](https://github.com/wcoder/) and all the hard work that was put into [highlightjs-line-numbers.js](https://github.com/wcoder/highlightjs-line-numbers.js/). This made it easy for me to port and include this functionality into this library.
 
-###Change the view's source
+### Change the view's source
 
 You can load the source you want to be highlighted by either a String containing the actual source code, a `File` object which represents the file containing the source code or an `URL`  object to load the source code from a remote Url.
 
@@ -152,11 +152,12 @@ highlightJsView.reload();
 - Source Code which is loaded via URL requires internet permission (source is loaded asynchronous) `<uses-permission android:name="android.permission.INTERNET" />`
 - Source Code which is loaded by a `File` object from the device's internal storage requires  storage permission (especially on +Android 6.0)
 
-##About & Contact
+## About & Contact
 - In case you've a question feel free to hit me up via E-Mail (patrick.pddstudio@googlemail.com)
 - or [Google+](http://plus.google.com/+PatrickJung42) / Hangouts
 
-##License
+## License
+
 ```
     Copyright 2016 Patrick J
 
