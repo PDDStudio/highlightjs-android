@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -23,17 +23,27 @@ public class FileUtils {
     }
 
     public static String loadSourceFromFile(File file) {
+	    BufferedReader bufferedReader = null;
         try {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+            bufferedReader = new BufferedReader(new FileReader(file), 16384);
             StringBuilder stringBuilder = new StringBuilder();
             String line;
-            while((line = bufferedReader.readLine()) != null) stringBuilder.append(line).append("\n");
-            fileInputStream.close();
+            while((line = bufferedReader.readLine()) != null) {
+            	stringBuilder.append(line).append("\n");
+            }
+
             return stringBuilder.toString();
         } catch (IOException io) {
             io.printStackTrace();
             return null;
+        } finally {
+        	if(bufferedReader != null) {
+		        try {
+			        bufferedReader.close();
+		        } catch (IOException e) {
+			        // ignore
+		        }
+	        }
         }
     }
 
@@ -53,9 +63,10 @@ public class FileUtils {
 
         @Override
         protected String doInBackground(Void... params) {
+	        BufferedReader bufferedReader = null;
             try {
                 URLConnection urlConnection = url.openConnection();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()), 16384);
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
                 while((line = bufferedReader.readLine()) != null) stringBuilder.append(line).append("\n");
@@ -64,6 +75,14 @@ public class FileUtils {
             } catch (IOException io) {
                 io.printStackTrace();
                 return null;
+            } finally {
+	            if(bufferedReader != null) {
+		            try {
+			            bufferedReader.close();
+		            } catch (IOException e) {
+			            // ignore
+		            }
+	            }
             }
         }
 
