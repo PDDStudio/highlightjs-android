@@ -42,7 +42,7 @@ public class SourceUtils {
 				"    <script>hljs.initHighlightingOnLoad();</script>\n" +
 				(showLineNumbers ? "<script>hljs.initLineNumbersOnLoad();</script>\n" : "") +
 				"</head>\n" +
-				"<body style=\"margin: 0; padding: 0\">\n";
+				"<body style=\"margin: 0; padding: 0\" class=\"hljs\">\n";
 	}
 
 	private static String getLineNumberStyling() {
