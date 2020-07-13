@@ -80,14 +80,39 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
         //make sure the view is blank
         loadUrl("about:blank");
         //set the settings for the view
-        WebSettings settings = getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setBuiltInZoomControls(true);
-        settings.setSupportZoom(zoomSupport);
+        //WebSettings settings = getSettings();
+        //settings.setJavaScriptEnabled(true);
+        //settings.setBuiltInZoomControls(true);
+        //settings.setSupportZoom(zoomSupport);
         //disable zoom controls on +Honeycomb devices
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) settings.setDisplayZoomControls(false);
+
         //to remove padding and margin
         setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+	    setScrollbarFadingEnabled(true);
+
+        WebSettings settings = getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setUseWideViewPort(true);
+        settings.setSupportZoom(true);
+        settings.setBuiltInZoomControls(true);
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        settings.setDomStorageEnabled(true);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        } else {
+            setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+	        settings.setDisplayZoomControls(false);
+        }
+
+        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+	        settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
+        }
     }
 
 	private void changeZoomSettings(boolean enable) {
@@ -166,7 +191,13 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
             //generate and load the content
             this.content = source;
             String page = SourceUtils.generateContent(source, theme.getName(), language.getName(), zoomSupport, showLineNumbers);
-            loadDataWithBaseURL("file:///android_asset/", page, "text/html", "utf-8", null);
+
+            long start = System.currentTimeMillis();
+            try {
+	            loadDataWithBaseURL("file:///android_asset/", page, "text/html", "utf-8", null);
+            } finally {
+            	System.out.println("로딩 : " + (System.currentTimeMillis() - start));
+            }
             //notify the callback (if set)
             if(onContentChangedListener != null) onContentChangedListener.onContentChanged();
         } else Log.e(getClass().getSimpleName(), "Source can't be null or empty.");
