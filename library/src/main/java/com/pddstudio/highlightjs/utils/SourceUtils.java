@@ -33,6 +33,9 @@ public class SourceUtils {
 				"           margin: 0px;\n" +
 				"           padding: 0px;\n" +
 				"       }\n" +
+				"       pre {\n" +
+				"           margin: 0;\n" +
+				"       }\n" +
 				"   </style>\n";
 	}
 
