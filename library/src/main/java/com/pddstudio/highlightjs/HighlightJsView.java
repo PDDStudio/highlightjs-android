@@ -227,6 +227,7 @@ public class HighlightJsView extends WebView implements FileUtils.Companion.Call
         FileUtils.Companion.loadSourceFromUrl(this, url);
     }
 
+
     /**
      * Refresh the View.
      * Needs to be called when setting a new language, theme or source.
