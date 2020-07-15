@@ -1,14 +1,16 @@
 package com.pddstudio.highlightjs;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import androidx.annotation.NonNull;
 
 import com.pddstudio.highlightjs.models.Language;
 import com.pddstudio.highlightjs.models.Theme;
@@ -76,6 +78,7 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
         initView(context);
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void initView(Context context) {
         //make sure the view is blank
         loadUrl("about:blank");
