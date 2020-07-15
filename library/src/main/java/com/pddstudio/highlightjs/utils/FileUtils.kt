@@ -1,6 +1,10 @@
 package com.pddstudio.highlightjs.utils
 
-import android.os.AsyncTask
+import android.util.Log
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.*
 import java.net.URL
 
@@ -9,51 +13,17 @@ import java.net.URL
  * on 09.06.16. For more Details and Licensing
  * have a look at the README.md
  */
-object FileUtils {
-    @JvmStatic
-    fun loadSourceFromFile(file: File?): String? {
-        var bufferedReader: BufferedReader? = null
-        return try {
-            bufferedReader = BufferedReader(FileReader(file), 16384)
-            val stringBuilder = StringBuilder()
-            var line: String?
-            while (bufferedReader.readLine().also { line = it } != null) {
-                stringBuilder.append(line).append("\n")
-            }
-            stringBuilder.toString()
-        } catch (io: IOException) {
-            io.printStackTrace()
-            null
-        } finally {
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close()
-                } catch (e: IOException) {
-                    // ignore
-                }
-            }
-        }
-    }
-
-    @JvmStatic
-    fun loadSourceFromUrl(callback: Callback, url: URL) {
-        NetworkLoader(callback, url).execute()
-    }
-
-    interface Callback {
-        fun onDataLoaded(success: Boolean, source: String?)
-    }
-
-    private class NetworkLoader constructor(private val callback: Callback, private val url: URL) : AsyncTask<Void?, Void?, String?>() {
-        override fun doInBackground(vararg params: Void?): String? {
+class FileUtils {
+    companion object {
+        fun loadSourceFromFile(file: File?): String? {
             var bufferedReader: BufferedReader? = null
             return try {
-                val urlConnection = url.openConnection()
-                bufferedReader = BufferedReader(InputStreamReader(urlConnection.getInputStream()), 16384)
+                bufferedReader = BufferedReader(FileReader(file), 16384)
                 val stringBuilder = StringBuilder()
                 var line: String?
-                while (bufferedReader.readLine().also { line = it } != null) stringBuilder.append(line).append("\n")
-                bufferedReader.close()
+                while (bufferedReader.readLine().also { line = it } != null) {
+                    stringBuilder.append(line).append("\n")
+                }
                 stringBuilder.toString()
             } catch (io: IOException) {
                 io.printStackTrace()
@@ -69,13 +39,39 @@ object FileUtils {
             }
         }
 
-        override fun onCancelled() {
-            callback.onDataLoaded(false, null)
+        fun loadSourceFromUrl(callback: Callback, url: URL) {
+            CoroutineScope(Dispatchers.Main).launch {
+                var result: String? = null
+                var success = false
+                withContext(Dispatchers.IO) {
+                    var bufferedReader: BufferedReader? = null
+                    try {
+                        val urlConnection = url.openConnection()
+                        bufferedReader = BufferedReader(InputStreamReader(urlConnection.inputStream), 16384)
+                        val stringBuilder = StringBuilder()
+                        var line: String?
+                        while (bufferedReader.readLine().also { line = it } != null) stringBuilder.append(line).append("\n")
+                        bufferedReader.close()
+
+                        result = stringBuilder.toString()
+                        success = true
+                    } catch (io: IOException) {
+                        io.printStackTrace()
+                    } finally {
+                        if (bufferedReader != null) {
+                            try {
+                                bufferedReader.close()
+                            } catch (e: IOException) {
+                            }
+                        }
+                    }
+                }
+                callback.onDataLoaded(success, result)
+            }
         }
 
-        override fun onPostExecute(s: String?) {
-            callback.onDataLoaded(s != null, s)
+        interface Callback {
+            fun onDataLoaded(success: Boolean, source: String?)
         }
-
     }
 }

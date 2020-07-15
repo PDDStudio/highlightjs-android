@@ -16,6 +16,8 @@ import com.pddstudio.highlightjs.demo.utils.ThemeChangerDialog;
 import com.pddstudio.highlightjs.models.Language;
 import com.pddstudio.highlightjs.models.Theme;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Random;
 
 public class SyntaxActivity extends AppCompatActivity implements
@@ -32,16 +34,16 @@ public class SyntaxActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_syntax);
-        FileObject fileObject = (FileObject) getIntent().getExtras().getSerializable("fileObject");
+//        FileObject fileObject = (FileObject) getIntent().getExtras().getSerializable("fileObject");
         if(getActionBar() != null) {
-            assert fileObject != null;
-            getActionBar().setTitle(fileObject.getAbsoluteFilePath());
+//            assert fileObject != null;
+            getActionBar().setTitle("https://raw.githubusercontent.com/iahrari/GithubSeeker/master/app/build.gradle");
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            assert fileObject != null;
-            getSupportActionBar().setTitle(fileObject.getAbsoluteFilePath());
+//            assert fileObject != null;
+            getSupportActionBar().setTitle("https://raw.githubusercontent.com/iahrari/GithubSeeker/master/app/build.gradle");
         }
         //set and assign swipe refresh listener
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
@@ -54,7 +56,11 @@ public class SyntaxActivity extends AppCompatActivity implements
         highlightJsView.setTheme(Theme.ANDROID_STUDIO);
         highlightJsView.setHighlightLanguage(Language.AUTO_DETECT);
         //load the source
-        highlightJsView.setSource(fileObject.getUrl());
+        try {
+            highlightJsView.setSource(new URL("https://raw.githubusercontent.com/iahrari/GithubSeeker/master/app/build.gradle"));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
