@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Libraries-highlightjs-android.iml" filepath="$PROJECT_DIR$/.idea/modules/Libraries-highlightjs-android.iml" group="highlightjs-android" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/highlightjs-android.iml" filepath="$PROJECT_DIR$/highlightjs-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/highlightjs-android-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/highlightjs-android-app.iml" group="highlightjs-android/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/highlightjs-android-library.iml" filepath="$PROJECT_DIR$/.idea/modules/library/highlightjs-android-library.iml" group="highlightjs-android/library" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
     </modules>
   </component>

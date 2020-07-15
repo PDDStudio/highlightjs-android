@@ -1,13 +1,14 @@
 package com.pddstudio.highlightjs.demo;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.pddstudio.highlightjs.HighlightJsView;
 import com.pddstudio.highlightjs.demo.utils.FileObject;
@@ -18,13 +19,12 @@ import com.pddstudio.highlightjs.models.Theme;
 import java.util.Random;
 
 public class SyntaxActivity extends AppCompatActivity implements
-                                                      SwipeRefreshLayout.OnRefreshListener,
-                                                      HighlightJsView.OnThemeChangedListener,
-                                                      ThemeChangerDialog.ThemeChangeListener {
+        SwipeRefreshLayout.OnRefreshListener,
+        HighlightJsView.OnThemeChangedListener,
+        ThemeChangerDialog.ThemeChangeListener {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private HighlightJsView highlightJsView;
-    private FileObject fileObject;
 
     private ThemeChangerDialog themeChangerDialog;
 
@@ -32,13 +32,15 @@ public class SyntaxActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_syntax);
-        fileObject = (FileObject) getIntent().getExtras().getSerializable("fileObject");
+        FileObject fileObject = (FileObject) getIntent().getExtras().getSerializable("fileObject");
         if(getActionBar() != null) {
+            assert fileObject != null;
             getActionBar().setTitle(fileObject.getAbsoluteFilePath());
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            assert fileObject != null;
             getSupportActionBar().setTitle(fileObject.getAbsoluteFilePath());
         }
         //set and assign swipe refresh listener
