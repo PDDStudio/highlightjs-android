@@ -63,7 +63,7 @@ public class RepositoryLoader {
 		protected Void doInBackground(Void... params) {
 			try {
 				Log.d(getClass().getSimpleName(), "entering try-catch block / Anonymous: " + gitHub.isAnonymous());
-				GHRepository ghRepository = gitHub.getRepository("PDDStudio/highlightjs-android");
+				GHRepository ghRepository = gitHub.getRepository("iahrari/highlightjs-android");
 				Log.d(getClass().getSimpleName(), "GHURepository null: " + (ghRepository == null));
 				Set<GHCommit> commitSet = ghRepository.listCommits().asSet();
 				Log.d(getClass().getSimpleName(), "GHCommit size: " + commitSet.size());

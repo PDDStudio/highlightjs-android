@@ -2,8 +2,9 @@ package com.pddstudio.highlightjs.demo.utils;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import com.pddstudio.highlightjs.demo.R;
 import com.pddstudio.highlightjs.models.Theme;
