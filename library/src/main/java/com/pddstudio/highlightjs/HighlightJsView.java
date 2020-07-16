@@ -27,7 +27,7 @@ import java.net.URL;
  * have a look at the README.md
  */
 
-public class HighlightJsView extends WebView implements FileUtils.Companion.Callback {
+public class HighlightJsView extends WebView implements FileUtils.Callback {
 
     //local variables to store language and theme
     private Language language = Language.AUTO_DETECT;
@@ -217,7 +217,7 @@ public class HighlightJsView extends WebView implements FileUtils.Companion.Call
      */
     public void setSource(File source) {
         //try to encode and set the source
-        String encSource = FileUtils.Companion.loadSourceFromFile(source);
+        String encSource = FileUtils.INSTANCE.loadSourceFromFile(source);
         if(encSource == null) {
             Log.e(getClass().getSimpleName(), "Unable to encode file: " + source.getAbsolutePath());
         } else setSource(encSource);
@@ -229,7 +229,7 @@ public class HighlightJsView extends WebView implements FileUtils.Companion.Call
      */
     public void setSource(URL url) {
         //try to encode and set the source
-        FileUtils.Companion.loadSourceFromUrl(this, url);
+        FileUtils.INSTANCE.loadSourceFromUrl(this, url);
     }
 
 
