@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 
 import com.pddstudio.highlightjs.models.Language;
 import com.pddstudio.highlightjs.models.Theme;
+import com.pddstudio.highlightjs.utils.ExtensionUtil;
 import com.pddstudio.highlightjs.utils.FileUtils;
 import com.pddstudio.highlightjs.utils.SourceUtils;
 
@@ -156,6 +157,10 @@ public class HighlightJsView extends WebView implements FileUtils.Companion.Call
         this.language = language;
         //notify the callback (if set)
         if(onLanguageChangedListener != null) onLanguageChangedListener.onLanguageChanged(language);
+    }
+
+    public void setLanguageByFileExtension(String extension){
+        setHighlightLanguage(ExtensionUtil.INSTANCE.getLanguageByExtension(extension));
     }
 
     /**
