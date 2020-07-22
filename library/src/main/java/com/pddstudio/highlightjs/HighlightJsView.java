@@ -160,7 +160,7 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
     }
 
     public void setLanguageByFileExtension(String extension){
-        setHighlightLanguage(ExtensionUtil.INSTANCE.getLanguageByExtension(extension));
+        setHighlightLanguage(ExtensionUtil.INSTANCE.getLanguageByExtension(extension.toLowerCase()));
     }
 
     /**
