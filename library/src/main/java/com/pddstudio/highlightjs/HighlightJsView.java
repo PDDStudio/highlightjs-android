@@ -159,6 +159,12 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
         if(onLanguageChangedListener != null) onLanguageChangedListener.onLanguageChanged(language);
     }
 
+    /**
+     * Set the desired language to highlight the given source by the extension of file which contained source.
+     * If It can't find extension type it'd set language to {@link Language#AUTO_DETECT}.
+     * Default: {@link Language#AUTO_DETECT}
+     * @param extension - Extension of file with contains code.
+     */
     public void setLanguageByFileExtension(String extension){
         setHighlightLanguage(ExtensionUtil.INSTANCE.getLanguageByExtension(extension.toLowerCase()));
     }
