@@ -64,7 +64,7 @@ public class RepositoryLoader {
 		protected Void doInBackground(Void... params) {
 			try {
 				Log.d(getClass().getSimpleName(), "entering try-catch block / Anonymous: " + gitHub.isAnonymous());
-				GHRepository ghRepository = gitHub.getRepository("iahrari/highlightjs-android");
+				GHRepository ghRepository = gitHub.getRepository("PDDStudio/highlightjs-android");
 				Log.d(getClass().getSimpleName(), "GHURepository null: " + (ghRepository == null));
 				Set<GHCommit> commitSet = ghRepository.listCommits().asSet();
 				Log.d(getClass().getSimpleName(), "GHCommit size: " + commitSet.size());
@@ -87,19 +87,9 @@ public class RepositoryLoader {
 		@Override
 		protected void onProgressUpdate(FileObject... values) {
 			Log.d(getClass().getSimpleName(), "onProgressUpdate() called.");
-			if (callback != null && isFileType(values[0])) {
+			if (callback != null) {
 				callback.onItemLoaded(values[0]);
 			}
-		}
-
-		private boolean isFileType(FileObject fileObject) {
-			if (fileObject.getAbsoluteFilePath().endsWith(".md") || fileObject.getAbsoluteFilePath().endsWith(".java") || fileObject.getAbsoluteFilePath().endsWith(".gradle") || fileObject.getAbsoluteFilePath()
-																																															.endsWith(".php") || fileObject
-					.getAbsoluteFilePath()
-					.endsWith(".h") || fileObject.getAbsoluteFilePath().endsWith(".xml")) {
-				return true;
-			}
-			return false;
 		}
 
 		@Override
@@ -108,5 +98,4 @@ public class RepositoryLoader {
 				callback.onFilesLoaded(fileObjectList);
 		}
 	}
-
 }

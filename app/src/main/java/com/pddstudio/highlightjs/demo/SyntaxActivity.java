@@ -16,14 +16,13 @@ import com.pddstudio.highlightjs.demo.utils.ThemeChangerDialog;
 import com.pddstudio.highlightjs.models.Language;
 import com.pddstudio.highlightjs.models.Theme;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Random;
 
 public class SyntaxActivity extends AppCompatActivity implements
         SwipeRefreshLayout.OnRefreshListener,
         HighlightJsView.OnThemeChangedListener,
-        ThemeChangerDialog.ThemeChangeListener {
+        ThemeChangerDialog.ThemeChangeListener,
+        HighlightJsView.OnLanguageChangedListener {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private HighlightJsView highlightJsView;
@@ -34,33 +33,34 @@ public class SyntaxActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_syntax);
-//        FileObject fileObject = (FileObject) getIntent().getExtras().getSerializable("fileObject");
+        FileObject fileObject = (FileObject) getIntent().getExtras().getSerializable("fileObject");
         if(getActionBar() != null) {
-//            assert fileObject != null;
-            getActionBar().setTitle("https://raw.githubusercontent.com/iahrari/GithubSeeker/master/app/build.gradle");
+            assert fileObject != null;
+            getActionBar().setTitle(fileObject.getFileName());
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//            assert fileObject != null;
-            getSupportActionBar().setTitle("https://raw.githubusercontent.com/iahrari/GithubSeeker/master/app/build.gradle");
+            assert fileObject != null;
+            getSupportActionBar().setTitle(fileObject.getFileName());
         }
         //set and assign swipe refresh listener
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         //find and instantiate the view
-        highlightJsView = (HighlightJsView) findViewById(R.id.highlight_view);
+        highlightJsView = findViewById(R.id.highlight_view);
         //register theme change listener
         highlightJsView.setOnThemeChangedListener(this);
         //change theme and set language to auto detect
         highlightJsView.setTheme(Theme.ANDROID_STUDIO);
-        highlightJsView.setHighlightLanguage(Language.AUTO_DETECT);
+        assert fileObject != null;
+        String[] name = fileObject.getFileName().split("\\.");
+        highlightJsView.setOnLanguageChangedListener(this);
+
+        if(name.length > 0)
+            highlightJsView.setLanguageByFileExtension(name[name.length - 1]);
         //load the source
-        try {
-            highlightJsView.setSource(new URL("https://raw.githubusercontent.com/iahrari/GithubSeeker/master/app/build.gradle"));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        highlightJsView.setSource(fileObject.getUrl());
     }
 
     @Override
@@ -131,4 +131,8 @@ public class SyntaxActivity extends AppCompatActivity implements
         highlightJsView.refresh();
     }
 
+    @Override
+    public void onLanguageChanged(@NonNull Language language) {
+        Toast.makeText(this, language.getName(), Toast.LENGTH_LONG).show();
+    }
 }

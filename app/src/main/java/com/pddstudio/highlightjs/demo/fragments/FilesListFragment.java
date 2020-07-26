@@ -40,9 +40,9 @@ public class FilesListFragment extends Fragment implements RepositoryLoader.Call
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_file_list, container, false);
-        recyclerView = (RecyclerView) root.findViewById(R.id.files_recycler_view);
+        recyclerView = root.findViewById(R.id.files_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        filesAdapter = new FilesAdapter(new LinkedList<FileObject>(), this);
+        filesAdapter = new FilesAdapter(new LinkedList<>(), this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(filesAdapter);
         return root;
