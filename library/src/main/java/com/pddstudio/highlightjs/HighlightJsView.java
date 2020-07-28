@@ -110,9 +110,7 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-	        settings.setDisplayZoomControls(false);
-        }
+        settings.setDisplayZoomControls(false);
 
         if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR1) {
 	        settings.setRenderPriority(WebSettings.RenderPriority.HIGH);

@@ -6,6 +6,7 @@ package com.pddstudio.highlightjs.models;
  * have a look at the README.md
  */
 
+@SuppressWarnings("SpellCheckingInspection")
 public enum Language {
     AUTO_DETECT(null),
     DISABLE_HIGHLIGHT("nohighlight"),

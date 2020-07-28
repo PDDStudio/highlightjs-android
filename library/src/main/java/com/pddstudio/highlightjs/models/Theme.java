@@ -6,6 +6,7 @@ package com.pddstudio.highlightjs.models;
  * have a look at the README.md
  */
 
+@SuppressWarnings("SpellCheckingInspection")
 public enum Theme {
     A11Y_DARK("a11y-dark"),
     A11Y_LIGHT("a11y-light"),
