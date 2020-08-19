@@ -2,14 +2,15 @@ package com.pddstudio.highlightjs.demo.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.pddstudio.highlightjs.demo.R;
 import com.pddstudio.highlightjs.demo.SyntaxActivity;
@@ -39,9 +40,9 @@ public class FilesListFragment extends Fragment implements RepositoryLoader.Call
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_file_list, container, false);
-        recyclerView = (RecyclerView) root.findViewById(R.id.files_recycler_view);
+        recyclerView = root.findViewById(R.id.files_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        filesAdapter = new FilesAdapter(new LinkedList<FileObject>(), this);
+        filesAdapter = new FilesAdapter(new LinkedList<>(), this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(filesAdapter);
         return root;

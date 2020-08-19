@@ -1,13 +1,14 @@
 package com.pddstudio.highlightjs.demo;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.pddstudio.highlightjs.HighlightJsView;
 import com.pddstudio.highlightjs.demo.utils.FileObject;
@@ -18,13 +19,13 @@ import com.pddstudio.highlightjs.models.Theme;
 import java.util.Random;
 
 public class SyntaxActivity extends AppCompatActivity implements
-                                                      SwipeRefreshLayout.OnRefreshListener,
-                                                      HighlightJsView.OnThemeChangedListener,
-                                                      ThemeChangerDialog.ThemeChangeListener {
+        SwipeRefreshLayout.OnRefreshListener,
+        HighlightJsView.OnThemeChangedListener,
+        ThemeChangerDialog.ThemeChangeListener,
+        HighlightJsView.OnLanguageChangedListener {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private HighlightJsView highlightJsView;
-    private FileObject fileObject;
 
     private ThemeChangerDialog themeChangerDialog;
 
@@ -32,25 +33,32 @@ public class SyntaxActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_syntax);
-        fileObject = (FileObject) getIntent().getExtras().getSerializable("fileObject");
+        FileObject fileObject = (FileObject) getIntent().getExtras().getSerializable("fileObject");
         if(getActionBar() != null) {
-            getActionBar().setTitle(fileObject.getAbsoluteFilePath());
+            assert fileObject != null;
+            getActionBar().setTitle(fileObject.getFileName());
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(fileObject.getAbsoluteFilePath());
+            assert fileObject != null;
+            getSupportActionBar().setTitle(fileObject.getFileName());
         }
         //set and assign swipe refresh listener
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         //find and instantiate the view
-        highlightJsView = (HighlightJsView) findViewById(R.id.highlight_view);
+        highlightJsView = findViewById(R.id.highlight_view);
         //register theme change listener
         highlightJsView.setOnThemeChangedListener(this);
         //change theme and set language to auto detect
         highlightJsView.setTheme(Theme.ANDROID_STUDIO);
-        highlightJsView.setHighlightLanguage(Language.AUTO_DETECT);
+        assert fileObject != null;
+        String[] name = fileObject.getFileName().split("\\.");
+        highlightJsView.setOnLanguageChangedListener(this);
+
+        if(name.length > 0)
+            highlightJsView.setLanguageByFileExtension(name[name.length - 1]);
         //load the source
         highlightJsView.setSource(fileObject.getUrl());
     }
@@ -123,4 +131,8 @@ public class SyntaxActivity extends AppCompatActivity implements
         highlightJsView.refresh();
     }
 
+    @Override
+    public void onLanguageChanged(@NonNull Language language) {
+        Toast.makeText(this, language.getName(), Toast.LENGTH_LONG).show();
+    }
 }

@@ -50,6 +50,7 @@ public class RepositoryLoader {
 	public void loadFiles(Callback callback) {
 		this.callback = callback;
 		new RepoLoader().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
 	}
 
 	private class RepoLoader extends AsyncTask<Void, FileObject, Void> {
@@ -86,19 +87,9 @@ public class RepositoryLoader {
 		@Override
 		protected void onProgressUpdate(FileObject... values) {
 			Log.d(getClass().getSimpleName(), "onProgressUpdate() called.");
-			if (callback != null && isFileType(values[0])) {
+			if (callback != null) {
 				callback.onItemLoaded(values[0]);
 			}
-		}
-
-		private boolean isFileType(FileObject fileObject) {
-			if (fileObject.getAbsoluteFilePath().endsWith(".md") || fileObject.getAbsoluteFilePath().endsWith(".java") || fileObject.getAbsoluteFilePath().endsWith(".gradle") || fileObject.getAbsoluteFilePath()
-																																															.endsWith(".php") || fileObject
-					.getAbsoluteFilePath()
-					.endsWith(".h") || fileObject.getAbsoluteFilePath().endsWith(".xml")) {
-				return true;
-			}
-			return false;
 		}
 
 		@Override
@@ -107,5 +98,4 @@ public class RepositoryLoader {
 				callback.onFilesLoaded(fileObjectList);
 		}
 	}
-
 }

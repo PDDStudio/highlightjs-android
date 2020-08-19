@@ -1,17 +1,20 @@
 package com.pddstudio.highlightjs;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import androidx.annotation.NonNull;
+
 import com.pddstudio.highlightjs.models.Language;
 import com.pddstudio.highlightjs.models.Theme;
+import com.pddstudio.highlightjs.utils.ExtensionUtil;
 import com.pddstudio.highlightjs.utils.FileUtils;
 import com.pddstudio.highlightjs.utils.SourceUtils;
 
@@ -76,18 +79,42 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
         initView(context);
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void initView(Context context) {
         //make sure the view is blank
         loadUrl("about:blank");
         //set the settings for the view
-        WebSettings settings = getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setBuiltInZoomControls(true);
-        settings.setSupportZoom(zoomSupport);
+        //WebSettings settings = getSettings();
+        //settings.setJavaScriptEnabled(true);
+        //settings.setBuiltInZoomControls(true);
+        //settings.setSupportZoom(zoomSupport);
         //disable zoom controls on +Honeycomb devices
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) settings.setDisplayZoomControls(false);
+
         //to remove padding and margin
         setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+	    setScrollbarFadingEnabled(true);
+
+        WebSettings settings = getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setUseWideViewPort(true);
+        settings.setSupportZoom(true);
+        settings.setBuiltInZoomControls(true);
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        settings.setDomStorageEnabled(true);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        } else {
+            setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
+
+        settings.setDisplayZoomControls(false);
+
+        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+	        settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
+        }
     }
 
 	private void changeZoomSettings(boolean enable) {
@@ -131,6 +158,16 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
     }
 
     /**
+     * Set the desired language to highlight the given source by the extension of file which contained source.
+     * If It can't find extension type it'd set language to {@link Language#AUTO_DETECT}.
+     * Default: {@link Language#AUTO_DETECT}
+     * @param extension - Extension of file with contains code.
+     */
+    public void setLanguageByFileExtension(String extension){
+        setHighlightLanguage(ExtensionUtil.INSTANCE.getLanguageByExtension(extension.toLowerCase()));
+    }
+
+    /**
      * Set the desired theme to highlight the given source.
      * Default: {@link Theme#DEFAULT}
      * @param theme
@@ -166,7 +203,13 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
             //generate and load the content
             this.content = source;
             String page = SourceUtils.generateContent(source, theme.getName(), language.getName(), zoomSupport, showLineNumbers);
-            loadDataWithBaseURL("file:///android_asset/", page, "text/html", "utf-8", null);
+
+            long start = System.currentTimeMillis();
+            try {
+	            loadDataWithBaseURL("file:///android_asset/", page, "text/html", "utf-8", null);
+            } finally {
+            	System.out.println("로딩 : " + (System.currentTimeMillis() - start));
+            }
             //notify the callback (if set)
             if(onContentChangedListener != null) onContentChangedListener.onContentChanged();
         } else Log.e(getClass().getSimpleName(), "Source can't be null or empty.");
@@ -178,7 +221,7 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
      */
     public void setSource(File source) {
         //try to encode and set the source
-        String encSource = FileUtils.loadSourceFromFile(source);
+        String encSource = FileUtils.INSTANCE.loadSourceFromFile(source);
         if(encSource == null) {
             Log.e(getClass().getSimpleName(), "Unable to encode file: " + source.getAbsolutePath());
         } else setSource(encSource);
@@ -190,8 +233,9 @@ public class HighlightJsView extends WebView implements FileUtils.Callback {
      */
     public void setSource(URL url) {
         //try to encode and set the source
-        FileUtils.loadSourceFromUrl(this, url);
+        FileUtils.INSTANCE.loadSourceFromUrl(this, url);
     }
+
 
     /**
      * Refresh the View.

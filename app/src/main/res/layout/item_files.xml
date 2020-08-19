@@ -12,14 +12,14 @@
         android:id="@+id/file_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Notification.Title"
+        android:textAppearance="@style/TextAppearance.Compat.Notification.Title"
         tools:text="HelloFile.Java"/>
 
     <TextView
         android:id="@+id/file_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Notification.Line2"
+        android:textAppearance="@style/TextAppearance.Compat.Notification.Line2"
         tools:text="/absolute/path/to/file" />
 
 </LinearLayout>

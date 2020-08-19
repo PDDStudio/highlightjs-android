@@ -1,7 +1,8 @@
 package com.pddstudio.highlightjs.utils;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * This Class was created by Patrick J
@@ -32,6 +33,9 @@ public class SourceUtils {
 				"           height: 100%;\n" +
 				"           margin: 0px;\n" +
 				"           padding: 0px;\n" +
+				"       }\n" +
+				"       pre {\n" +
+				"           margin: 0;\n" +
 				"       }\n" +
 				"   </style>\n";
 	}
