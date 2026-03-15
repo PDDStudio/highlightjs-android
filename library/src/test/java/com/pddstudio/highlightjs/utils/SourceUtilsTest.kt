@@ -97,6 +97,6 @@ class SourceUtilsTest {
         val result = SourceUtils.generateContent("code", "default", null, false, false)
 
         assertTrue(result.contains("highlight.pack.js"))
-        assertTrue(result.contains("hljs.initHighlightingOnLoad()"))
+        assertTrue(result.contains("hljs.highlightAll()"))
     }
 }
