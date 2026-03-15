@@ -470,10 +470,5 @@ sealed interface Language {
             X86_ASSEMBLY, XL, X_QUERY, ZEPHIR
         )
 
-        // ── Convenience aliases for single-letter / underscore-prefixed languages ──
-        @JvmField val _1C: Language = Language._1C
-        @JvmField val C: Language = Language.C
-        @JvmField val Q: Language = Language.Q
-        @JvmField val R: Language = Language.R
     }
 }
