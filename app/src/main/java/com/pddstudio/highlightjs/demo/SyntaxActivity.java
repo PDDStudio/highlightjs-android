@@ -77,23 +77,17 @@ public class SyntaxActivity extends AppCompatActivity implements
 
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case android.R.id.home:
-				onBackPressed();
-				break;
-			case R.id.menu_switch_theme:
-				themeChangerDialog.show(this);
-				break;
-			case R.id.menu_check_line_numbers:
-				item.setChecked(!item.isChecked());
-				onShowLineNumbersToggled(item.isChecked());
-				break;
-			case R.id.menu_check_zoom:
-				item.setChecked(!item.isChecked());
-				onZoomSupportToggled(item.isChecked());
-				break;
-			default:
-				break;
+		int id = item.getItemId();
+		if (id == android.R.id.home) {
+			onBackPressed();
+		} else if (id == R.id.menu_switch_theme) {
+			themeChangerDialog.show(this);
+		} else if (id == R.id.menu_check_line_numbers) {
+			item.setChecked(!item.isChecked());
+			onShowLineNumbersToggled(item.isChecked());
+		} else if (id == R.id.menu_check_zoom) {
+			item.setChecked(!item.isChecked());
+			onZoomSupportToggled(item.isChecked());
 		}
         return super.onOptionsItemSelected(item);
     }
