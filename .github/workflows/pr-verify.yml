@@ -1,18 +1,19 @@
 # PR Verification Workflow
-# Runs on every pull request targeting main.
+# Runs on every pull request targeting the default branch.
 # Builds the project, runs unit tests, and uploads test reports.
 #
 # Branch protection recommendation:
 #   - Require this workflow to pass before merging
 #   - Require at least 1 approving review
 #   - Require branches to be up to date before merging
-#   - Restrict force-pushes to main
+#   - Restrict force-pushes to the default branch
 
 name: PR Verification
 
 on:
   pull_request:
     branches:
+      - master
       - main
 
 permissions:

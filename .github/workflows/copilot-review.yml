@@ -1,5 +1,5 @@
 # Copilot Code Review Workflow
-# Triggers GitHub Copilot automated code review on pull requests targeting main.
+# Triggers GitHub Copilot automated code review on pull requests targeting the default branch.
 #
 # Prerequisites (one-time repo setup):
 #   1. Go to Settings → Copilot → Policies → Code review
@@ -18,6 +18,7 @@ on:
       - synchronize
       - ready_for_review
     branches:
+      - master
       - main
 
 permissions:
