@@ -18,15 +18,19 @@ import java.io.File
 import java.net.URL
 
 /**
- * This Class was created by Patrick J
- * on 09.06.16. For more Details and Licensing
- * have a look at the README.md
+ * Legacy View-based highlight.js component.
+ *
+ * This class is retained for backward compatibility with XML layouts that embed it directly.
+ * For new code, prefer [HighlightJsComposeView] (View-based host wrapping the Compose
+ * component) or the [HighlightJsView] Compose composable together with [rememberHighlightState].
+ *
+ * The Java Builder API that previously lived alongside this class has been removed — use
+ * [HighlightState] and the [highlightJs] DSL builder instead.
  */
-
 class HighlightJsView : WebView, FileUtils.Callback {
 
-    private var language: Language = Language.AUTO_DETECT
-    private var theme: Theme = Theme.DEFAULT
+    private var language: Language = Language.AutoDetect
+    private var theme: Theme = Theme.Default
     private var content: String? = null
     private var zoomSupport: Boolean = false
     private var showLineNumbers: Boolean = false
@@ -137,7 +141,13 @@ class HighlightJsView : WebView, FileUtils.Callback {
     fun setSource(source: String) {
         if (source.isNotEmpty()) {
             this.content = source
-            val page = SourceUtils.generateContent(source, theme.getName(), language.getName(), zoomSupport, showLineNumbers)
+            val page = SourceUtils.generateContent(
+                source = source,
+                style = theme.themeName,
+                language = language.className,
+                supportZoom = zoomSupport,
+                showLineNumbers = showLineNumbers
+            )
 
             val start = System.currentTimeMillis()
             try {
