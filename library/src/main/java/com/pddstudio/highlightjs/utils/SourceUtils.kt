@@ -40,7 +40,7 @@ object SourceUtils {
     private fun getScriptPageHeader(showLineNumbers: Boolean): String {
         return "    <script src=\"./highlight.pack.js\"></script>\n" +
                 (if (showLineNumbers) "<script src=\"./highlightjs-line-numbers.min.js\"></script>\n" else "") +
-                "    <script>hljs.initHighlightingOnLoad();</script>\n" +
+                "    <script>hljs.highlightAll();</script>\n" +
                 (if (showLineNumbers) "<script>hljs.initLineNumbersOnLoad();</script>\n" else "") +
                 "</head>\n" +
                 "<body style=\"margin: 0; padding: 0\" class=\"hljs\">\n"

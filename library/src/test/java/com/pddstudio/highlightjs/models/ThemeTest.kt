@@ -23,7 +23,6 @@ class ThemeTest {
 
     @Test
     fun `common theme names are correct`() {
-        assertEquals("dracula", Theme.DRACULA.getName())
         assertEquals("atom-one-dark", Theme.ATOM_ONE_DARK.getName())
         assertEquals("atom-one-light", Theme.ATOM_ONE_LIGHT.getName())
         assertEquals("default", Theme.DEFAULT.getName())
@@ -34,8 +33,8 @@ class ThemeTest {
         assertEquals("vs2015", Theme.VS2015.getName())
         assertEquals("xcode", Theme.X_CODE.getName())
         assertEquals("androidstudio", Theme.ANDROID_STUDIO.getName())
-        assertEquals("darcula", Theme.DARCULA.getName())
-        assertEquals("zenburn", Theme.ZENBURN.getName())
+        assertEquals("nord", Theme.NORD.getName())
+        assertEquals("github-dark", Theme.GITHUB_DARK.getName())
     }
 
     @Test
