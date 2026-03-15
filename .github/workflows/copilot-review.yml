@@ -37,8 +37,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr review ${{ github.event.pull_request.number }} \
-            --repo ${{ github.repository }} \
-            --request-review copilot || true
+          gh api \
+            repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/requested_reviewers \
+            --method POST \
+            --field 'reviewers[]=copilot-pull-request-reviewer' || true
           # `|| true` prevents failure if Copilot review is not enabled for the repo;
           # the PR verification workflow still gates the merge.
