@@ -1,4 +1,4 @@
-package com.pddstudio.highlightjs.models;
+package com.pddstudio.highlightjs.models
 
 /**
  * This Class was created by Patrick J
@@ -6,8 +6,8 @@ package com.pddstudio.highlightjs.models;
  * have a look at the README.md
  */
 
-@SuppressWarnings("SpellCheckingInspection")
-public enum Theme {
+@Suppress("SpellCheckingInspection")
+enum class Theme(private val themeName: String) {
     A11Y_DARK("a11y-dark"),
     A11Y_LIGHT("a11y-light"),
     AGATE("agate"),
@@ -102,14 +102,5 @@ public enum Theme {
     XT256("xt256"),
     ZENBURN("zenburn");
 
-    private final String themeName;
-
-    Theme(String themeName) {
-        this.themeName = themeName;
-    }
-
-    public String getName() {
-        return themeName;
-    }
-
+    fun getName(): String = themeName
 }

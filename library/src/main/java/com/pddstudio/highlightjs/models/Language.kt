@@ -1,4 +1,4 @@
-package com.pddstudio.highlightjs.models;
+package com.pddstudio.highlightjs.models
 
 /**
  * This Class was created by Patrick J
@@ -6,8 +6,8 @@ package com.pddstudio.highlightjs.models;
  * have a look at the README.md
  */
 
-@SuppressWarnings("SpellCheckingInspection")
-public enum Language {
+@Suppress("SpellCheckingInspection")
+enum class Language(private val className: String?) {
     AUTO_DETECT(null),
     DISABLE_HIGHLIGHT("nohighlight"),
     _1C("1c"),
@@ -102,7 +102,7 @@ public enum Language {
     KOTLIN("kt"),
     LATEX("tex"),
     LASSO("lasso"),
-	LEAF("leaf"),
+    LEAF("leaf"),
     LEAN("lean"),
     LESS("less"),
     LDIF("ldif"),
@@ -123,7 +123,7 @@ public enum Language {
     MOJOLICIOUS("mojolicious"),
     MONKEY("monkey"),
     MOONSCRIPT("moonscript"),
-	N1QL("n1ql"),
+    N1QL("n1ql"),
     NSIS("nsis"),
     NGINX("nginx"),
     NIMROD("nimrod"),
@@ -193,14 +193,5 @@ public enum Language {
     X_QUERY("xq"),
     ZEPHIR("zep");
 
-    private final String className;
-
-    Language(String name) {
-        this.className = name;
-    }
-
-    public String getName() {
-        return className;
-    }
-
+    fun getName(): String? = className
 }
