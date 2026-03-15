@@ -1,0 +1,43 @@
+# Copilot Code Review Workflow
+# Triggers GitHub Copilot automated code review on pull requests targeting main.
+#
+# Prerequisites (one-time repo setup):
+#   1. Go to Settings → Copilot → Policies → Code review
+#   2. Enable "Copilot code review" for this repository
+#   3. Optionally configure custom review instructions in .github/copilot-instructions.md
+#
+# This workflow explicitly requests a Copilot review using the gh CLI so that
+# reviews are consistently triggered even without the automatic review setting.
+
+name: Copilot Code Review
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - ready_for_review
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  copilot-review:
+    name: Request Copilot Review
+    runs-on: ubuntu-latest
+    # Skip draft PRs — only review when the PR is ready
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Request GitHub Copilot review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr review ${{ github.event.pull_request.number }} \
+            --repo ${{ github.repository }} \
+            --request-review copilot || true
+          # `|| true` prevents failure if Copilot review is not enabled for the repo;
+          # the PR verification workflow still gates the merge.
