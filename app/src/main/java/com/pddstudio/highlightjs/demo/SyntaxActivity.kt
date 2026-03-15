@@ -99,7 +99,7 @@ class SyntaxActivity : AppCompatActivity(),
 
     override fun onThemeChanged(theme: Theme) {
         swipeRefreshLayout.isRefreshing = false
-        Toast.makeText(this, "Theme: " + theme.name, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Theme: " + theme.themeName, Toast.LENGTH_SHORT).show()
     }
 
     override fun onChangeTheme(theme: Theme) {
