@@ -8,57 +8,91 @@ import org.junit.jupiter.api.Test
 class LanguageTest {
 
     @Test
-    fun `AUTO_DETECT has null name`() {
-        assertNull(Language.AUTO_DETECT.name2())
+    fun `AUTO_DETECT has null className`() {
+        assertNull(Language.AutoDetect.className)
     }
 
     @Test
-    fun `DISABLE_HIGHLIGHT has nohighlight name`() {
-        assertEquals("nohighlight", Language.DISABLE_HIGHLIGHT.name2())
+    fun `DISABLE_HIGHLIGHT has nohighlight className`() {
+        assertEquals("nohighlight", Language.DisableHighlight.className)
     }
 
     @Test
-    fun `all languages except AUTO_DETECT have non-null names`() {
-        Language.values()
-            .filter { it != Language.AUTO_DETECT }
-            .forEach { language ->
-                assertNotNull(language.name2(), "Expected non-null name for ${language.name}")
+    fun `companion AUTO_DETECT has null className`() {
+        assertNull(Language.AUTO_DETECT.className)
+    }
+
+    @Test
+    fun `companion DISABLE_HIGHLIGHT has nohighlight className`() {
+        assertEquals("nohighlight", Language.DISABLE_HIGHLIGHT.className)
+    }
+
+    @Test
+    fun `common language class names are correct`() {
+        assertEquals("kt", Language.Kotlin.className)
+        assertEquals("java", Language.Java.className)
+        assertEquals("python", Language.Python.className)
+        assertEquals("javascript", Language.JavaScript.className)
+        assertEquals("typescript", Language.TypeScript.className)
+        assertEquals("go", Language.Go.className)
+        assertEquals("rust", Language.Rust.className)
+        assertEquals("cpp", Language.CPlusPlus.className)
+        assertEquals("csharp", Language.CSharp.className)
+        assertEquals("ruby", Language.Ruby.className)
+        assertEquals("swift", Language.Swift.className)
+        assertEquals("scala", Language.Scala.className)
+        assertEquals("dart", Language.Dart.className)
+        assertEquals("html", Language.Html.className)
+        assertEquals("xml", Language.Xml.className)
+        assertEquals("json", Language.Json.className)
+        assertEquals("css", Language.Css.className)
+        assertEquals("sql", Language.Sql.className)
+        assertEquals("bash", Language.Bash.className)
+        assertEquals("md", Language.Markdown.className)
+        assertEquals("php", Language.Php.className)
+        assertEquals("gradle", Language.Gradle.className)
+    }
+
+    @Test
+    fun `getName() backward compat returns className`() {
+        assertEquals(Language.Kotlin.className, Language.Kotlin.getName())
+        assertNull(Language.AutoDetect.getName())
+    }
+
+    @Test
+    fun `Custom language carries arbitrary class name`() {
+        val custom = Language.Custom("my-custom-lang")
+        assertEquals("my-custom-lang", custom.className)
+        assertEquals("my-custom-lang", custom.getName())
+    }
+
+    @Test
+    fun `companion @JvmField constants match their data objects`() {
+        assertEquals(Language.AutoDetect, Language.AUTO_DETECT)
+        assertEquals(Language.DisableHighlight, Language.DISABLE_HIGHLIGHT)
+        assertEquals(Language.Kotlin, Language.KOTLIN)
+        assertEquals(Language.Java, Language.JAVA)
+        assertEquals(Language.Python, Language.PYTHON)
+        assertEquals(Language.Go, Language.GO)
+    }
+
+    @Test
+    fun `sealed interface has expected well-known entries`() {
+        val knownLanguages: List<Language> = listOf(
+            Language.AutoDetect, Language.DisableHighlight,
+            Language.Kotlin, Language.Java, Language.Python,
+            Language.JavaScript, Language.TypeScript, Language.Go,
+            Language.Rust, Language.CPlusPlus, Language.CSharp,
+            Language.Ruby, Language.Swift, Language.Scala,
+            Language.Dart, Language.Html, Language.Xml,
+            Language.Json, Language.Css, Language.Sql,
+            Language.Bash, Language.Markdown, Language.Php,
+            Language.Gradle
+        )
+        knownLanguages
+            .filter { it != Language.AutoDetect }
+            .forEach { lang ->
+                assertNotNull(lang.className, "Expected non-null className for $lang")
             }
     }
-
-    @Test
-    fun `common language names are correct`() {
-        assertEquals("kt", Language.KOTLIN.name2())
-        assertEquals("java", Language.JAVA.name2())
-        assertEquals("python", Language.PYTHON.name2())
-        assertEquals("javascript", Language.JAVA_SCRIPT.name2())
-        assertEquals("typescript", Language.TYPE_SCRIPT.name2())
-        assertEquals("go", Language.GO.name2())
-        assertEquals("rust", Language.RUST.name2())
-        assertEquals("cpp", Language.C_PLUS_PLUS.name2())
-        assertEquals("csharp", Language.C_SHARP.name2())
-        assertEquals("ruby", Language.RUBY.name2())
-        assertEquals("swift", Language.SWIFT.name2())
-        assertEquals("scala", Language.SCALA.name2())
-        assertEquals("dart", Language.DART.name2())
-        assertEquals("html", Language.HTML.name2())
-        assertEquals("xml", Language.XML.name2())
-        assertEquals("json", Language.JSON.name2())
-        assertEquals("css", Language.CSS.name2())
-        assertEquals("sql", Language.SQL.name2())
-        assertEquals("bash", Language.BASH.name2())
-        assertEquals("md", Language.MARKDOWN.name2())
-        assertEquals("php", Language.PHP.name2())
-        assertEquals("gradle", Language.GRADLE.name2())
-    }
-
-    @Test
-    fun `all enum values are accessible`() {
-        val values = Language.values()
-        assert(values.isNotEmpty())
-        assert(values.size > 100) { "Expected Language enum to have more than 100 values, got ${values.size}" }
-    }
-
-    // Alias to avoid shadowing the Kotlin enum `name` property
-    private fun Language.name2(): String? = this.getName()
 }
